@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nakrokwiowo.pl – Już wkrótce</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sage:    #4A7060;
+      --sage-l:  #6B9B84;
+      --sage-d:  #2E4F3E;
+      --sage-bg: rgba(91,123,106,.07);
+      --amber:   #C8850A;
+      --amber-d: #A86D06;
+      --charcoal:#1C1C1C;
+      --ash:     #6B7280;
+      --snow:    #FAFBF9;
+      --paper:   #F5F3EE;
+      --warm:    #E8E4DD;
+      --danger:  #C75050;
+      --serif:   'Playfair Display', Georgia, serif;
+      --sans:    'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--snow);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-weight: 400;
+      line-height: 1.65;
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── PASEK GÓRNY ── */
+    .topbar {
+      width: 100%;
+      background: var(--sage-d);
+      padding: 0.6rem 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtelna siatka w tle */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--warm) 1px, transparent 1px),
+        linear-gradient(90deg, var(--warm) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Gradient zasłaniający siatkę przy krawędziach */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 40%, var(--snow) 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 680px;
+    }
+
+    /* Logo */
+    .logo {
+      font-family: var(--sans);
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--sage);
+      margin-bottom: 3.5rem;
+      display: inline-block;
+    }
+    .logo span { color: var(--charcoal); }
+
+    /* Ikona dachu */
+    .roof-icon {
+      margin: 0 auto 2.5rem;
+      width: 64px; height: 64px;
+      background: var(--sage-bg);
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(74,112,96,.15);
+    }
+    .roof-icon svg { width: 32px; height: 32px; }
+
+    /* Główny tytuł */
+    .coming-soon-pl {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 600;
+      line-height: 1.1;
+      color: var(--charcoal);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.02em;
+    }
+    .coming-soon-pl em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    /* Angielski podtytuł */
+    .coming-soon-en {
+      font-family: var(--serif);
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ash);
+      margin-bottom: 2.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    /* Divider */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: var(--sage);
+      margin: 0 auto 2.5rem;
+      border-radius: 2px;
+      opacity: 0.5;
+    }
+
+    /* Opis działalności */
+    .description {
+      font-size: 1rem;
+      color: var(--ash);
+      line-height: 1.75;
+      max-width: 520px;
+      margin: 0 auto 1rem;
+    }
+    .description strong { color: var(--charcoal); font-weight: 600; }
+
+    /* Angielski opis */
+    .description-en {
+      font-size: 0.88rem;
+      color: var(--ash);
+      font-style: italic;
+      max-width: 520px;
+      margin: 0 auto 3.5rem;
+      opacity: 0.75;
+    }
+
+    /* ── FORMULARZ ── */
+    .contact-section {
+      max-width: 520px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .contact-prompt {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--charcoal);
+      margin-bottom: 0.4rem;
+      letter-spacing: -0.01em;
+    }
+    .contact-prompt em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .contact-sub {
+      font-size: 0.88rem;
+      color: var(--ash);
+      margin-bottom: 1.8rem;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    label {
+      display: block;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ash);
+      margin-bottom: 0.4rem;
+      font-weight: 500;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: #fff;
+      border: 1px solid var(--warm);
+      border-radius: 6px;
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      padding: 0.75rem 1rem;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+    input:focus, textarea:focus {
+      border-color: var(--sage);
+      box-shadow: 0 0 0 3px rgba(74,112,96,.1);
+    }
+    textarea { resize: vertical; min-height: 100px; font-family: var(--sans); }
+
+    .btn-send {
+      width: 100%;
+      background: var(--amber);
+      color: #fff;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 6px;
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-send:hover { background: var(--amber-d); transform: translateY(-1px); }
+    .btn-send:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    .success-msg {
+      display: none;
+      background: rgba(52,133,90,.08);
+      border: 1px solid var(--sage-l);
+      border-radius: 6px;
+      padding: 1rem;
+      color: var(--sage-d);
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    .error-msg {
+      display: none;
+      background: rgba(199,80,80,.07);
+      border: 1px solid var(--danger);
+      border-radius: 6px;
+      padding: 1rem;
+      color: var(--danger);
+      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal);
+      padding: 1.4rem 2rem;
+      text-align: center;
+    }
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.35);
+    }
+    footer a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+    }
+    footer a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSYWNOŚĆ ── */
+    @media (max-width: 520px) {
+      .hero { padding: 4rem 1.2rem 2.5rem; }
+      .coming-soon-pl { font-size: 2rem; }
+      .tags { gap: 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">nakrokwiowo.pl</div>
+
+  <section class="hero">
+    <div class="hero-inner">
+
+      <!-- Ikona -->
+      <div class="roof-icon">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 18L16 6L28 18" stroke="#4A7060" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="8" y="18" width="16" height="10" rx="1" stroke="#4A7060" stroke-width="2"/>
+          <path d="M8 16L16 8L24 16" fill="rgba(74,112,96,0.15)" stroke="none"/>
+        </svg>
+      </div>
+
+      <!-- Tytuł PL + EN -->
+      <h1 class="coming-soon-pl">Strona w przygotowaniu.</h1>
+      <p class="coming-soon-en">Our website is on its way.</p>
+
+      <div class="divider"></div>
+
+      <!-- Opis PL -->
+      <p class="description">
+        Specjalizujemy się w <strong>izolacji nakrokwiowej PIR</strong> –
+        najskuteczniejszym sposobie na eliminację mostków termicznych i trwałe
+        ocieplenie dachu skośnego. Doradzamy w doborze grubości, organizujemy
+        dostawę i zapewniamy profesjonalne wsparcie na każdym etapie inwestycji.
+      </p>
+
+      <!-- Opis EN -->
+      <p class="description-en">
+        We specialise in above-rafter PIR insulation — the most effective
+        solution for thermal bridge-free roofs. Expert advice, supply &amp; support.
+      </p>
+
+<!-- Formularz -->
+      <div class="contact-section">
+        <h2 class="contact-prompt">Masz pytania?<br><em>Napisz do nas już teraz.</em></h2>
+        <p class="contact-sub">Chętnie odpowiemy na każde pytanie dotyczące izolacji nakrokwiowej.</p>
+
+        <div class="form-group">
+          <label>Imię i nazwisko</label>
+          <input type="text" id="contactName" placeholder="Jan Kowalski"/>
+        </div>
+        <div class="form-group">
+          <label>Telefon lub e-mail</label>
+          <input type="text" id="contactContact" placeholder="jan@example.com lub 600 000 000"/>
+        </div>
+        <div class="form-group">
+          <label>Wiadomość (opcjonalnie)</label>
+          <textarea id="contactMsg" placeholder="Opisz swój projekt, podaj wymiary dachu lub zadaj pytanie..."></textarea>
+        </div>
+
+        <button class="btn-send" onclick="sendForm()">Wyślij wiadomość →</button>
+        <div class="success-msg" id="successMsg">✅ Dziękujemy! Odezwiemy się w ciągu 24 godzin.</div>
+        <div class="error-msg" id="errorMsg">⚠️ Coś poszło nie tak. Napisz bezpośrednio na nakrokwiowo@gmail.com</div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 nakrokwiowo.pl &nbsp;·&nbsp; <a href="mailto:nakrokwiowo@gmail.com">nakrokwiowo@gmail.com</a> &nbsp;·&nbsp; <a href="tel:+48574455271">+48 574 455 271</a></p>
+  </footer>
+
+  <script>
+    async function sendForm() {
+      const name    = document.getElementById('contactName').value.trim();
+      const contact = document.getElementById('contactContact').value.trim();
+      const msg     = document.getElementById('contactMsg').value.trim();
+
+      if (!name || !contact) {
+        document.getElementById('contactName').style.borderColor    = name    ? '' : '#C75050';
+        document.getElementById('contactContact').style.borderColor = contact ? '' : '#C75050';
+        return;
+      }
+
+      const btn = document.querySelector('.btn-send');
+      btn.textContent = 'Wysyłanie...';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('https://formspree.io/f/xwvzyevk', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            imie_nazwisko: name,
+            kontakt:       contact,
+            wiadomosc:     msg || 'Brak wiadomości',
+            zrodlo:        'Strona tymczasowa – nakrokwiowo.pl'
+          })
+        });
+
+        if (res.ok) {
+          document.getElementById('successMsg').style.display = 'block';
+          document.getElementById('contactName').value    = '';
+          document.getElementById('contactContact').value = '';
+          document.getElementById('contactMsg').value     = '';
+          btn.textContent = 'Wyślij wiadomość →';
+          btn.disabled = false;
+        } else {
+          throw new Error('Błąd serwera');
+        }
+      } catch (err) {
+        btn.textContent = 'Wyślij wiadomość →';
+        btn.disabled = false;
+        document.getElementById('errorMsg').style.display = 'block';
+      }
+    }
+  </script>
+
+</body>
+</html>
